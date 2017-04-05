@@ -34,5 +34,4 @@ class Database
 		self::$cont = null;
 	}
 }
-//show_source(__FILE__)
 ?>

@@ -1,31 +1,45 @@
-<?php 
-	session_start();
-	if(!isset($_SESSION["id"])){ // if "user" not set,
-		session_destroy();
-		header('Location: login.php');     // go to login page
-		exit;
-	}
+<?php
+/* ---------------------------------------------------------------------------
+ * filename    : login.php
+ * author      : skstockm, skstockm@svsu.edu
+ * description : This program logs the user in by setting $_SESSION variables
+ * ---------------------------------------------------------------------------
+ */
 
-	require 'database.php';
-	$id = 0;
+// Start or resume session, and create: $_SESSION[] array
+session_start(); 
+
+require 'database.php';
+
+if ( !empty($_POST)) { // if $_POST filled then process the form
+	// initialize $_POST variables
+	$username = $_POST['username']; // username is email address
+	$password = $_POST['password'];
 	
-	if ( !empty($_GET['id'])) {
-		$id = $_REQUEST['id'];
-	}
-	
-	if ( !empty($_POST)) {
-		// keep track post values
-		$id = $_POST['id'];
-		// delete data
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM appointments WHERE id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
+	// verify the username/password
+	$pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM physician_office_admin WHERE username = ? AND password = ? LIMIT 1";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($username,$password));
+	$data = $q->fetch(PDO::FETCH_ASSOC);
+	if($data) { // if successful login set session variables
+		echo "success!";
+		$_SESSION['id'] = $data['id'];
+		$sessionid = $data['id'];
 		Database::disconnect();
-		header("Location: appointments.php");
-		
-	} 
+		//echo $sessionid;
+		//var_dump($data);
+		//exit();
+		header("Location: index.php?id=$sessionid ");
+	}
+	else { // otherwise go to login error page
+		Database::disconnect();
+		header("Location: login_error.html");
+	}
+} 
+// if $_POST NOT filled then display login form, below.
+
 ?>
 <!DOCTYPE html>
 <!-- ------------------------------------------------------------------------
@@ -88,7 +102,7 @@ external code used in this file:
 
 				position:fixed;
 				right:10px;
-				top:50px;
+				top:5px;
 			}
 		</style>
 
@@ -109,60 +123,50 @@ external code used in this file:
 					</button>
 					<a class="navbar-brand" href="#">Physician Appointments</a>
 				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="index.php">Home</a>
-						</li>
-						<li>
-							<a href="createPatient.php">Create Patient</a>
-							
-						</li>
-						<li>
-							<a href="createAppointment.php">Create Appointment</a>
-						</li>
-						<li>
-							<a href="existingPatient.php">Existing Patients</a>
-						</li>
-						<li>
-							<a href="appointments.php">Appointment List</a>
-						</li>
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
 			</div>
 			<!-- /.container -->
 		</nav>
 
 		<!-- Page Content -->
 		<div class="container">
-
+			<div class="span10 offset1">
 		
-		<div class="span10 offset1">
-			<div class="row">
-				<h3>Delete an Appointment</h3>
-			</div>
-			
-			<form class="form-horizontal" action="deleteAppointment.php" method="post">
-			  <input type="hidden" name="id" value="<?php echo $id;?>"/>
-			  <p class="alert alert-error">Are you sure to delete ?</p>
-			  <div class="form-actions" id = "buttons">
-				  <button type="submit" class="btn btn-danger">Yes</button>
-				  <a class="btn btn-default" href="appointments.php">No</a>
-				  <a href="logout.php" class="logoutLblPos">Logout</a>
+				<div class="row">
+					<h3><b>Login</b></h3>
 				</div>
-			</form>
-		</div>
+		
+				<form class="form-horizontal" action="login.php" method="post">
+									  
+					<div class="control-group">
+						<label class="control-label">Username</label>
+						<div class="controls">
+							<input name="username" type="text"  placeholder="username" required>
+						</div>	<!-- end div: class="controls" -->
+					</div> <!-- end div class="control-group" -->
+					
+					<div class="control-group">
+						<label class="control-label">Password</label>
+						<div class="controls">
+							<input name="password" type="password" placeholder="password" required>
+						</div>	
+					</div> 
 
-		<!-- Footer -->
-		<footer>
-			<div class="row">
-				<div class="col-lg-12">
-					<p>Copyright &copy; and Designed with <i class="fa fa-heart"></i> by Staci Stockmeyer 2017</p>
+					<div class="form-actions" id = "buttons">
+						<button type="submit" class="btn btn-success">Sign in</button>
+						&nbsp; &nbsp;
+					</div>
+					
+				</form>
+				
+			</div> <!-- end div: class="span10 offset1" -->
+			<!-- Footer -->
+			<footer>
+				<div class="row">
+					<div class="col-lg-12">
+						<p>Copyright &copy; and Designed with <i class="fa fa-heart"></i> by Staci Stockmeyer 2017</p>
+					</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
 
 		</div>
 		<!-- /.container -->
