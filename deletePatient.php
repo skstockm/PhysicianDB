@@ -15,11 +15,10 @@
 	if ( !empty($_POST)) {
 		// keep track post values
 		$id = $_POST['id'];
-		
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM patient  WHERE id = ?";
+		$sql = "DELETE FROM patient WHERE id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
@@ -28,34 +27,6 @@
 	} 
 ?>
 <!DOCTYPE html>
-<!-- ------------------------------------------------------------------------
-filename  : StockmeyerProgram04.html
-author    : Staci Stockmeyer
-date      : 2016-06-21
-email     : skstockm@svsu.edu
-course    : CIS-255
-link      : csis.svsu.edu/~skstockm/cis255/skstockm/StockmeyerProgram04.html
-backup    : github.com/cis255/cis255
-purpose   : This file serves as Program4 that uses widgets,  
-			at Saginaw Valley State University (SVSU) if they are planning on
-			majoring in CS or CIS
-copyright : GNU General Public License (http://www.gnu.org/licenses/)
-			This program is free software: you can redistribute it and/or modify
-			it under the terms of the GNU General Public License as published by
-			the Free Software Foundation, either version 3 of the License, or
-			(at your option) any later version.
-			This program is distributed in the hope that it will be useful,
-			but WITHOUT ANY WARRANTY; without even the implied warranty of
-			MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
-program structure : 
-	<head> metadata, links, script
-	<body> The sections of the program: 
-		navbar, carousel, My Modern Business Stuff, my portfolio, modern business features, contact
-		
-external code used in this file: 
-	template from: http://startbootstrap.com/template-overviews/modern-business/
-	widgets from: http://www.jqwidgets.com/jquery-widgets-demo/
----------------------------------------------------------------------------------->
 <html lang="en">
 
 	<head>
@@ -66,7 +37,7 @@ external code used in this file:
 		<meta name="description" content="Stockmeyer Modern Business" />
 		<meta name="author" content="Staci Stockmeyer" />
 
-		<title>Stockmeyer Business</title>
+		<title>Physician Appointments</title>
 
 		<!--favricon-->
 		<link rel="icon" href="Medicine Stethoscope.png" type="image/png" />
@@ -117,7 +88,6 @@ external code used in this file:
 						</li>
 						<li>
 							<a href="createPatient.php">Create Patient</a>
-							
 						</li>
 						<li>
 							<a href="createAppointment.php">Create Appointment</a>
@@ -146,7 +116,7 @@ external code used in this file:
 			
 			<form class="form-horizontal" action="deletePatient.php" method="post">
 			  <input type="hidden" name="id" value="<?php echo $id;?>"/>
-			  <p class="alert alert-error">Are you sure to delete ?</p>
+			  <p class="alert alert-error">Are you sure to delete this patient?</p>
 			  <div class="form-actions" id = "buttons">
 				  <button type="submit" class="btn btn-danger">Yes</button>
 				  <a class="btn btn-default" href="existingPatient.php">No</a>
@@ -180,7 +150,6 @@ external code used in this file:
 		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
 		<!--<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.js"></script>-->
 
-		<!--<script src="StockmeyerProgram04.js"></script>-->
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

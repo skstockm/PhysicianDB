@@ -108,34 +108,6 @@
 	}
 ?>
 <!DOCTYPE html>
-<!-- ------------------------------------------------------------------------
-filename  : StockmeyerProgram04.html
-author    : Staci Stockmeyer
-date      : 2016-06-21
-email     : skstockm@svsu.edu
-course    : CIS-255
-link      : csis.svsu.edu/~skstockm/cis255/skstockm/StockmeyerProgram04.html
-backup    : github.com/cis255/cis255
-purpose   : This file serves as Program4 that uses widgets,  
-			at Saginaw Valley State University (SVSU) if they are planning on
-			majoring in CS or CIS
-copyright : GNU General Public License (http://www.gnu.org/licenses/)
-			This program is free software: you can redistribute it and/or modify
-			it under the terms of the GNU General Public License as published by
-			the Free Software Foundation, either version 3 of the License, or
-			(at your option) any later version.
-			This program is distributed in the hope that it will be useful,
-			but WITHOUT ANY WARRANTY; without even the implied warranty of
-			MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
-program structure : 
-	<head> metadata, links, script
-	<body> The sections of the program: 
-		navbar, carousel, My Modern Business Stuff, my portfolio, modern business features, contact
-		
-external code used in this file: 
-	template from: http://startbootstrap.com/template-overviews/modern-business/
-	widgets from: http://www.jqwidgets.com/jquery-widgets-demo/
----------------------------------------------------------------------------------->
 <html lang="en">
 
 	<head>
@@ -145,9 +117,7 @@ external code used in this file:
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="Stockmeyer Modern Business" />
 		<meta name="author" content="Staci Stockmeyer" />
-
-		<title>Stockmeyer Business</title>
-
+		<title>Physician Appointments</title>
 		<!--favricon-->
 		<link rel="icon" href="Medicine Stethoscope.png" type="image/png" />
 		

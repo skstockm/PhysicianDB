@@ -2,7 +2,7 @@
 /* ---------------------------------------------------------------------------
  * filename    : api.php
  * author      : Staci Stockmeyer, skstockm@svsu.edu
- * description : This program returns all the names in the fr_persons file OR 
+ * description : This program returns all the names in the physician file OR 
  *				 if id param is set then only that person's name AS A JSON OBJECT
  * ---------------------------------------------------------------------------
  */

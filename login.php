@@ -2,7 +2,7 @@
 /* ---------------------------------------------------------------------------
  * filename    : login.php
  * author      : skstockm, skstockm@svsu.edu
- * description : This program logs the user in by setting $_SESSION variables
+ * description : This program logs the user in by setting $_SESSION variable
  * ---------------------------------------------------------------------------
  */
 
@@ -80,7 +80,7 @@ external code used in this file:
 		<meta name="description" content="Stockmeyer Modern Business" />
 		<meta name="author" content="Staci Stockmeyer" />
 
-		<title>Stockmeyer Business</title>
+		<title>Physician Appointments</title>
 
 		<!--favricon-->
 		<link rel="icon" href="Medicine Stethoscope.png" type="image/png" />
